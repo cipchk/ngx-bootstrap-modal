@@ -20,7 +20,7 @@ export class DemoComponent {
     opt: any = {
         title: '',
         content: '',
-        icon: '',
+        icon: 'success', //success
         size: 'sm',
         showCloseButton: true,
         input: 'text',
@@ -28,6 +28,7 @@ export class DemoComponent {
         inputPlaceholder: '必填项',
         inputRequired: true,
         inputError: '',
+        inputAttributes: {},
         showCancelButton: true,
         cancelButtonText: '取消',
         cancelButtonClass: 'btn-default',
@@ -41,6 +42,13 @@ export class DemoComponent {
             this.confirm_result = res ? '确认' : '取消';
         });
     }
+    inputOptions: string = `{
+        "": "请选择",
+        "durex": "杜蕾斯",
+        "jissbon": "杰士邦",
+        "donless": "多乐士",
+        "first": "处男"
+    }`;
     regex: string = ''; // [a-z]+
     prompt_result: any;
     bPrompt() {
@@ -48,7 +56,18 @@ export class DemoComponent {
             this.opt.inputRegex = new RegExp(this.regex);
         else
             this.opt.inputRegex = null;
-            console.log(this.opt.inputRegex)
+        
+        if (this.inputOptions) {
+            try {
+                this.opt.inputOptions = this.opt.input == 'checkbox' ? this.inputOptions : JSON.parse(this.inputOptions);
+            }catch(ex) {
+                alert(`数据无法JSON.parse：${ex}`);
+                return;
+            }
+        } else {
+            this.opt.inputOptions = {};
+        }
+        this.opt.icon = '';
 
         this.dialogService.prompt(this.opt.title || '请输入新值', this.opt).then((res: any) => {
             this.prompt_result = res;

@@ -134,6 +134,9 @@ export class DialogService {
         let opt = Object.assign(<BuiltInOptions>{
             type: 'default',
             size: 'sm',
+            input: 'text',
+            inputOptions: {},
+            inputAttributes: {},
             showCloseButton: true,
             showCancelButton: true,
             cancelButtonText: '取消',
