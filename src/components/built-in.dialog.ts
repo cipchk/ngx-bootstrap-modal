@@ -84,7 +84,7 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
     public classs: Object = {};
 
     public prompError: boolean = false;
-    public promptData: string;
+    public promptData: any;
     constructor(dialogService: DialogService) {
         super(dialogService);
     }

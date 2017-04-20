@@ -1,6 +1,6 @@
 export interface BuiltInOptions {
     /**
-     * 静态框类型
+     * 模态框类型
      * 
      * @type {('default' | 'alert' | 'confirm' | 'prompt')}
      */
@@ -38,24 +38,24 @@ export interface BuiltInOptions {
     /**
      * Input 初始化值
      * 
-     * @type {string}
+     * @type {any}
      */
-    inputValue?: string;
+    inputValue?: any;
     /**
-     * Input `required` 字段 
+     * Input `required` 字段，必填项校验失败时【确定】按钮为 `disabled` 状态。
      * 
      * @type {boolean}
      * @default true
      */
     inputRequired?: boolean;
     /**
-     * Input 正则判断
+     * Input 正则判断校验，校验失败时【确定】按钮为 `disabled` 状态。
      * 
      * @type {RegExp}
      */
     inputRegex?: RegExp;
     /**
-     * 输入参数无效时提醒
+     * 输入参数无效时提醒文本。
      * 
      * @type {string}
      */

@@ -47,6 +47,8 @@ export interface DialogOptions {
 
 export class DialogServiceConfig {
     container: HTMLElement = null;
+
+    builtInOptions?: BuiltInOptions;
 }
 
 @Injectable()
@@ -72,6 +74,7 @@ export class DialogService {
      */
     constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef, private injector: Injector, @Optional() config: DialogServiceConfig) {
         this.container = config && config.container;
+        this.DEFOPT = config && config.builtInOptions;
     }
 
     /**
@@ -130,6 +133,13 @@ export class DialogService {
         return componentRef.instance;
     }
 
+    public DEFOPT: BuiltInOptions;
+
+    /**
+     * 构建一个内置模态
+     * @param builtInOptions 内置配置参数
+     * @param options 模态配置参数
+     */
     show(builtInOptions: BuiltInOptions, options?: DialogOptions) {
         let opt = Object.assign(<BuiltInOptions>{
             type: 'default',
@@ -144,7 +154,7 @@ export class DialogService {
             showConfirmButton: true,
             confirmButtonText: '确认',
             confirmButtonClass: 'btn-primary'
-        }, builtInOptions);
+        }, this.DEFOPT, builtInOptions);
 
         this.addDialog<BuiltInOptions, any>(BuiltInComponent, <any>{
             opt: opt
@@ -162,6 +172,7 @@ export class DialogService {
      * 
      * @param {string} title 
      * @param {string} content 
+     * @param {BuiltInOptions} 覆盖内置配置参数
      */
     alert(title: string, content: string, options?: BuiltInOptions) {
         this.show(Object.assign({}, options, <BuiltInOptions>{
@@ -173,10 +184,12 @@ export class DialogService {
     }
 
     /**
-     * show confirm
+     * Show confirm
      * 
      * @param {string} title 
      * @param {string} content 
+     * @param {BuiltInOptions} 覆盖内置配置参数
+     * @returns {Promise<boolean>} 返回一个Promise布尔类型
      */
     confirm(title: string, content: string, options?: BuiltInOptions): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
@@ -192,13 +205,14 @@ export class DialogService {
     }
 
     /**
-     * show confirm
+     * Show prompt
      * 
      * @param {string} title 
-     * @param {string} content 
+     * @param {BuiltInOptions} 覆盖内置配置参数
+     * @returns {Promise<any>} 返回一个Promise任意类型
      */
-    prompt(title: string, promptOptions?: BuiltInOptions): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
+    prompt(title: string, promptOptions?: BuiltInOptions): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
             this.show(Object.assign(<BuiltInOptions>{
                 input: 'text',
                 inputRequired: true,
@@ -206,8 +220,8 @@ export class DialogService {
             }, promptOptions, <BuiltInOptions>{
                 type: 'prompt',
                 title: title,
-                onHide: (res: boolean) => {
-                    resolve(res === undefined ? false : res);
+                onHide: (res: any) => {
+                    resolve(res);
                 }
             }));
         });

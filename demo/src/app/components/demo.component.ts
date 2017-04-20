@@ -4,7 +4,7 @@ import { AlertComponent } from './alert.component';
 import { ConfirmComponent } from './confirm.component';
 import { PromptComponent } from './prompt.component';
 import { ParentDialogComponent } from './parent-dialog.component';
-import { DialogService } from "ngx-bootstrap-modal";
+import { DialogService, BuiltInOptions } from "ngx-bootstrap-modal";
 
 @Component({
     selector: 'demo',
@@ -14,7 +14,8 @@ export class DemoComponent {
     confirmResult: boolean = null;
     promptMessage: string = '';
 
-    constructor(private dialogService: DialogService) { }
+    constructor(private dialogService: DialogService) { 
+    }
 
 
     opt: any = {
@@ -31,10 +32,8 @@ export class DemoComponent {
         inputAttributes: {},
         showCancelButton: true,
         cancelButtonText: '取消',
-        cancelButtonClass: 'btn-default',
         showConfirmButton: true,
-        confirmButtonText: '确认',
-        confirmButtonClass: 'btn-primary'
+        confirmButtonText: '确认'
     };
     confirm_result: string = '';
     bConfirm() {

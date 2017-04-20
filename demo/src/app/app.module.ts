@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { BootstrapModalModule } from 'ngx-bootstrap-modal';
+import { BootstrapModalModule, BuiltInOptions } from 'ngx-bootstrap-modal';
 
 import { AppComponent } from './app.component';
 import { DemoComponent } from './components/demo.component';
@@ -21,7 +21,11 @@ import { AlertComponent } from './components/alert.component';
         HttpModule,
         CommonModule,
 
-        BootstrapModalModule
+        BootstrapModalModule.forRoot({
+            container: document.body,
+            builtInOptions: <BuiltInOptions>{
+            }
+        })
     ],
     declarations: [
         AppComponent,
