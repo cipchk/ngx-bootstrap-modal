@@ -14,7 +14,7 @@ export class DemoComponent {
     confirmResult: boolean = null;
     promptMessage: string = '';
 
-    constructor(private dialogService: DialogService) { 
+    constructor(public dialogService: DialogService) { 
     }
 
 
