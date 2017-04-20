@@ -1,8 +1,10 @@
 import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { FormsModule } from '@angular/forms';
 import { DialogHolderComponent } from "./dialog-holder.component";
 import { DialogWrapperComponent } from "./dialog-wrapper.component";
 import { DialogService, DialogServiceConfig } from "./dialog.service";
+import { BuiltInComponent } from './built-in.dialog';
 /**
  * Dialog service factory. Creates dialog service with options
  * @param { ComponentFactoryResolver } resolver
@@ -16,19 +18,22 @@ export function dialogServiceFactory(resolver: ComponentFactoryResolver, applica
 }
 
 @NgModule({
+    imports: [
+        CommonModule,
+        FormsModule
+    ],
     declarations: [
         DialogHolderComponent,
-        DialogWrapperComponent
+        DialogWrapperComponent,
+        BuiltInComponent
     ],
     providers: [
         DialogService
     ],
-    imports: [
-        CommonModule
-    ],
     entryComponents: [
         DialogHolderComponent,
-        DialogWrapperComponent
+        DialogWrapperComponent,
+        BuiltInComponent
     ]
 })
 export class BootstrapModalModule {

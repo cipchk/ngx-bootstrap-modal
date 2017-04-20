@@ -6,7 +6,7 @@ simplify the work with bootstrap modal dialogs
 
 一个简单的**引导Bootstrap模态框组件启动**的服务，无须引入Bootstrap JS文件，并且兼容Bootstrap 3 4 版本。
 
-组件的核心代码都来自［ng2-bootstrap-modal](https://github.com/ankosoftware/ng2-bootstrap-modal)，在此基础上做了适量优化。
+> 组件的核心代码都来自［ng2-bootstrap-modal](https://github.com/ankosoftware/ng2-bootstrap-modal)，在此基础上做了适量优化。
 
 ## 安装
 
@@ -305,14 +305,14 @@ interface DialogOptions {
      * @type {number}
      * @default 不会自动关闭
      */
-    autoCloseTimeout?: number;
+    timeout?: number;
     /**
-     * 点击背景时关闭
+     * 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。
      * 
      * @type {boolean}
      * @default true
      */
-    closeByClickingOutside?: boolean;
+    backdrop?: boolean | string;
     /**
      * 背景色
      * 

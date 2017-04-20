@@ -4,6 +4,8 @@ import {
 import { DialogHolderComponent } from "./dialog-holder.component";
 import { DialogComponent } from "./dialog.component";
 import { Observable } from "rxjs";
+import { BuiltInOptions } from './built-in.options';
+import { BuiltInComponent } from './built-in.dialog';
 
 export interface DialogOptions {
     /**
@@ -19,14 +21,14 @@ export interface DialogOptions {
      * @type {number}
      * @default 不会自动关闭
      */
-    autoCloseTimeout?: number;
+    timeout?: number;
     /**
-     * 点击背景时关闭
+     * 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。
      * 
      * @type {boolean}
      * @default true
      */
-    closeByClickingOutside?: boolean;
+    backdrop?: boolean | string;
     /**
      * 背景色
      * 
@@ -126,5 +128,85 @@ export class DialogService {
         this.container.appendChild(componentRootNode);
 
         return componentRef.instance;
+    }
+
+    show(builtInOptions: BuiltInOptions, options?: DialogOptions) {
+        let opt = Object.assign(<BuiltInOptions>{
+            type: 'default',
+            size: 'sm',
+            showCloseButton: true,
+            showCancelButton: true,
+            cancelButtonText: '取消',
+            cancelButtonClass: 'btn-default',
+            showConfirmButton: true,
+            confirmButtonText: '确认',
+            confirmButtonClass: 'btn-primary'
+        }, builtInOptions);
+
+        this.addDialog<BuiltInOptions, any>(BuiltInComponent, <any>{
+            opt: opt
+        }, options).subscribe(res => {
+            if (opt.onHide)
+                opt.onHide(res);
+        });
+
+        if (opt.onShow)
+            opt.onShow();
+    }
+
+    /**
+     * Show Alter
+     * 
+     * @param {string} title 
+     * @param {string} content 
+     */
+    alert(title: string, content: string, options?: BuiltInOptions) {
+        this.show(Object.assign({}, options, <BuiltInOptions>{
+            type: 'alert',
+            title: title,
+            content: content,
+            showCancelButton: false
+        }));
+    }
+
+    /**
+     * show confirm
+     * 
+     * @param {string} title 
+     * @param {string} content 
+     */
+    confirm(title: string, content: string, options?: BuiltInOptions): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            this.show(Object.assign({}, options, <BuiltInOptions>{
+                type: 'confirm',
+                title: title,
+                content: content,
+                onHide: (res: boolean) => {
+                    resolve(res === undefined ? false : res);
+                }
+            }));
+        });
+    }
+
+    /**
+     * show confirm
+     * 
+     * @param {string} title 
+     * @param {string} content 
+     */
+    prompt(title: string, promptOptions?: BuiltInOptions): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            this.show(Object.assign(<BuiltInOptions>{
+                input: 'text',
+                inputRequired: true,
+                inputError: '不可为空'
+            }, promptOptions, <BuiltInOptions>{
+                type: 'prompt',
+                title: title,
+                onHide: (res: boolean) => {
+                    resolve(res === undefined ? false : res);
+                }
+            }));
+        });
     }
 }

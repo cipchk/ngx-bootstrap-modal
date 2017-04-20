@@ -41,11 +41,14 @@ export class DialogHolderComponent {
      * @return {Observable<*>}
      */
     addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
-        options = options || <DialogOptions>{
+        options = Object.assign(<DialogOptions>{
+            backdrop: true,
             backdropColor: 'rgba(0,0,0,.5)',
-            closeByClickingOutside: true,
             keyboard: true
-        };
+        }, options);
+        
+        if (options.backdrop === false)
+            options.backdropColor = '';
 
         // add body class if this is the only dialog in the stack
         if (!document.body.classList.contains('modal-open')) {
@@ -67,12 +70,12 @@ export class DialogHolderComponent {
             dialogWrapper.container.nativeElement.classList.add('show');
             dialogWrapper.container.nativeElement.classList.add('in');
         });
-        if (options.autoCloseTimeout) {
+        if (options.timeout) {
             setTimeout(() => {
                 this.removeDialog(_component);
-            }, options.autoCloseTimeout);
+            }, options.timeout);
         }
-        if (options.closeByClickingOutside) {
+        if (options.backdrop === true) {
             dialogWrapper.closeByClickOutside();
         }
         if (options.backdropColor) {

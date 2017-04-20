@@ -16,6 +16,45 @@ export class DemoComponent {
 
     constructor(private dialogService: DialogService) { }
 
+
+    opt: any = {
+        title: '',
+        content: '',
+        icon: '',
+        size: 'sm',
+        showCloseButton: true,
+        input: 'text',
+        inputValue: '',
+        inputPlaceholder: '必填项',
+        inputRequired: true,
+        inputError: '',
+        showCancelButton: true,
+        cancelButtonText: '取消',
+        cancelButtonClass: 'btn-default',
+        showConfirmButton: true,
+        confirmButtonText: '确认',
+        confirmButtonClass: 'btn-primary'
+    };
+    confirm_result: string = '';
+    bConfirm() {
+        this.dialogService.confirm(this.opt.title || '提醒', this.opt.content || '确认要删除吗？', this.opt).then((res: any) => {
+            this.confirm_result = res ? '确认' : '取消';
+        });
+    }
+    regex: string = ''; // [a-z]+
+    prompt_result: any;
+    bPrompt() {
+        if (this.regex)
+            this.opt.inputRegex = new RegExp(this.regex);
+        else
+            this.opt.inputRegex = null;
+            console.log(this.opt.inputRegex)
+
+        this.dialogService.prompt(this.opt.title || '请输入新值', this.opt).then((res: any) => {
+            this.prompt_result = res;
+        })
+    }
+
     showAlert() {
         this.dialogService.addDialog(AlertComponent, { title: 'Alert title!', message: 'Alert message!!!' });
     }
@@ -43,11 +82,15 @@ export class DemoComponent {
     }
 
     showAlert2() {
-        this.dialogService.addDialog(AlertComponent, { message: 'Click outside to close dialog' }, { closeByClickingOutside: true });
+        this.dialogService.addDialog(AlertComponent, { message: 'Click outside to close dialog' });
+    }
+
+    showAlert5() {
+        this.dialogService.addDialog(AlertComponent, { message: 'Click outside only close button' }, { backdrop: 'static' });
     }
 
     showAlert3() {
-        this.dialogService.addDialog(AlertComponent, { message: 'Wait 5 seconds and dialog will be closed automatically' }, { autoCloseTimeout: 5000 });
+        this.dialogService.addDialog(AlertComponent, { message: 'Wait 5 seconds and dialog will be closed automatically' }, { timeout: 5000 });
     }
 
     showAlert4() {
