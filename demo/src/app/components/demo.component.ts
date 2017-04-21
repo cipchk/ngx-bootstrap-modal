@@ -21,7 +21,7 @@ export class DemoComponent {
     opt: any = {
         title: '',
         content: '',
-        icon: 'success', //success
+        icon: '', //success
         size: 'sm',
         showCloseButton: true,
         input: 'text',
