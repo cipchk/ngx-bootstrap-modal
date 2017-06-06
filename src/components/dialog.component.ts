@@ -59,7 +59,8 @@ export class DialogComponent<T, T1> implements OnDestroy {
     /**
      * Closes dialog
      */
-    close(): void {
+    close(result?: T1): void {
+        if (typeof result !== 'undefined') this.result = result;
         this.dialogService.removeDialog(this);
     }
 
@@ -70,6 +71,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
     ngOnDestroy(): void {
         if (this.observer) {
             this.observer.next(this.result);
+            this.observer.complete();
         }
     }
 }
