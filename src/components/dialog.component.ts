@@ -10,7 +10,7 @@ import { DialogService, DialogOptions } from "./dialog.service";
  * @template T - dialog data;
  * @template T1 - dialog result
  */
-export class DialogComponent<T, T1> implements OnDestroy {
+export class DialogComponent<T, T1> {
 
     public options: DialogOptions;
     
@@ -62,13 +62,6 @@ export class DialogComponent<T, T1> implements OnDestroy {
     close(result?: T1): void {
         if (typeof result !== 'undefined') this.result = result;
         this.dialogService.removeDialog(this);
-    }
-
-    /**
-     * OnDestroy handler
-     * Sends dialog result to observer
-     */
-    ngOnDestroy(): void {
         if (this.observer) {
             this.observer.next(this.result);
             this.observer.complete();
