@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-modal",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "typings": "index.d.ts",
   "description": "simplify the work with bootstrap modal dialogs",
@@ -40,9 +40,9 @@
     "version": "npm run flow.changelog && git add -A"
   },
   "dependencies": {
+    "ngx-bootstrap": "^2.0.0-beta.2"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@angular/cli": "1.0.0",
     "@angular/common": "4.0.1",
