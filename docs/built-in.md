@@ -35,7 +35,7 @@ import { AppComponent } from './app.component';
   imports: [
     CommonModule,
     BrowserModule,
-    BootstrapModalModule
+    BootstrapModalModule.forRoot() // 如果模块延迟加载使用 `BootstrapModalModule.forRoot({container:document.body})`
   ],
   bootstrap: [AppComponent]
 })
