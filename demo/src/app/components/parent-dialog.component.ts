@@ -19,7 +19,7 @@ import { ConfirmComponent } from "./confirm.component";
                      <p>bla-bla</p>
                    </div>
                    <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="confirm()">Close</button>
+                     <button type="button" autofocus class="btn btn-primary" (click)="confirm()">Close</button>
                    </div>
                 </div>
              </div>`

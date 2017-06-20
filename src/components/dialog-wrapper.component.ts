@@ -1,3 +1,4 @@
+import { BuiltInComponent } from './built-in.dialog';
 import {
   Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, ReflectiveInjector, Type
 } from '@angular/core';
@@ -49,6 +50,11 @@ export class DialogWrapperComponent {
     this.element.insert(componentRef.hostView);
     this.content =  <DialogComponent<T, T1>> componentRef.instance;
     this.content.wrapper = this;
+    if (component !== BuiltInComponent) {
+        setTimeout(() => {
+            this.setFocus();
+        }, 100);
+    }
     return this.content;
   }
 
@@ -64,5 +70,10 @@ export class DialogWrapperComponent {
         this.dialogService.removeDialog(this.content);
     }, false);
   }
-}
 
+  private setFocus() {
+    const containerEl = this.container.nativeElement;
+    let autoFocusEl = containerEl.querySelector('[autofocus]');
+    if (autoFocusEl) autoFocusEl.focus();
+  }
+}

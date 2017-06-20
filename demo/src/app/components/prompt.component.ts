@@ -17,7 +17,7 @@ export interface PromptModel {
                     </button>
                    </div>
                    <div class="modal-body">
-                    <label>{{question}}</label><input type="text" class="form-control" [(ngModel)]="message" name="name" >
+                    <label>{{question}}</label><input autofocus type="text" class="form-control" [(ngModel)]="message" name="name" >
                    </div>
                    <div class="modal-footer">
                      <button type="button" class="btn btn-primary" (click)="apply()">OK</button>

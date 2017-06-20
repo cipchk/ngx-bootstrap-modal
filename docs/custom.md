@@ -154,7 +154,8 @@ import { DialogService } from "ngx-bootstrap-modal";
     selector: 'app',
     template: `
     <div class="container">
-        <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
+        <!--如果需要设置焦点，可以指定：autofocus-->
+        <button class="btn btn-default" autofocus (click)=showConfirm()>Show confirm</button>
     </div>
     `
 })

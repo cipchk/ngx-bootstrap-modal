@@ -1,11 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DialogService } from "./dialog.service";
 import { DialogComponent } from './dialog.component';
 import { BuiltInOptions } from './built-in.options';
 
 @Component({
     selector: 'dialog-built-in',
-    template: `<div class="modal-dialog modal-{{opt.size}}" [ngClass]="classs">
+    template: `<div class="modal-dialog modal-{{opt.size}}" [ngClass]="classs" #container>
                 <div class="modal-content" [ngClass]="{'text-center':opt.icon}">
                    <div class="modal-header" *ngIf="opt.title" [hidden]="opt.icon">
                      <h5 class="modal-title">{{opt.title}}</h5>
@@ -33,7 +33,7 @@ import { BuiltInOptions } from './built-in.options';
                      <div *ngIf="opt.content" [innerHTML]="opt.content"></div>
                      <div [ngSwitch]="opt.input" *ngIf="opt.type === 'prompt'" class="modal-{{opt.type}}" [ngClass]="{'has-danger has-error': prompError}">
                         <textarea *ngSwitchCase="'textarea'" placeholder="{{opt.inputPlaceholder}}" [(ngModel)]="promptData"
-                            class="form-control" autofocus [ngClass]="{'form-control-danger': prompError}"></textarea>
+                            class="form-control" [ngClass]="{'form-control-danger': prompError}"></textarea>
                         <select *ngSwitchCase="'select'" [(ngModel)]="promptData" name="promptData"
                             (ngModelChange)="onChanage()"
                             class="form-control" [ngClass]="{'form-control-danger': prompError}">
@@ -63,13 +63,13 @@ import { BuiltInOptions } from './built-in.options';
                         <input *ngSwitchDefault type="{{opt.input}}"
                             placeholder="{{opt.inputPlaceholder}}" [(ngModel)]="promptData" name="promptData"
                             (ngModelChange)="onChanage()" (keyup)="onKeyup($event)"
-                            class="form-control" autofocus [ngClass]="{'form-control-danger': prompError}">
+                            class="form-control" [ngClass]="{'form-control-danger': prompError}">
                         <div class="form-control-feedback" *ngIf="prompError">{{opt.inputError}}</div>
                     </div>
                    </div>
                    <div class="modal-footer" *ngIf="opt.showConfirmButton || opt.showCancelButton">
-                     <button type="button" class="btn" (click)="close()" [ngClass]="opt.cancelButtonClass" [hidden]="!opt.showCancelButton">{{opt.cancelButtonText}}</button>
-                     <button type="button" class="btn" (click)="ok()" [disabled]="prompError" [ngClass]="opt.confirmButtonClass" [hidden]="!opt.showConfirmButton">{{opt.confirmButtonText}}</button>
+                     <button type="button" class="cancel btn" tabIndex="2" (click)="close()" [ngClass]="opt.cancelButtonClass" [hidden]="!opt.showCancelButton">{{opt.cancelButtonText}}</button>
+                     <button type="button" class="confirm btn" tabIndex="1" (click)="ok()" [disabled]="prompError" [ngClass]="opt.confirmButtonClass" [hidden]="!opt.showConfirmButton">{{opt.confirmButtonText}}</button>
                    </div>
                 </div>
              </div>`,
@@ -79,6 +79,7 @@ import { BuiltInOptions } from './built-in.options';
     encapsulation: ViewEncapsulation.None
 })
 export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
+    @ViewChild('container') container: any;
     public opt: BuiltInOptions;
     public checkboxMap: any = {};
     public classs: Object = {};
@@ -95,7 +96,7 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
 
         if (this.opt.icon)
             this.classs['has-icon'] = true;
-        
+
         if (this.opt.type === 'prompt' && !this.opt.inputRegex) {
             switch (this.opt.input) {
                 case 'email':
@@ -113,6 +114,10 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
         if (this.promptData) {
             this.promptCheck();
         }
+
+        setTimeout(() => {
+            this.setFocus();
+        }, 100);
     }
 
     private promptCheck(): boolean {
@@ -128,6 +133,17 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
         
         this.prompError = false;
         return true;
+    }
+
+    private setFocus() {
+        const containerEl = this.container.nativeElement;
+        let firstFormEl: any = null;
+        if (this.opt.type === 'prompt') {
+            firstFormEl = containerEl.querySelector('input, textarea, select');
+        } else {
+            firstFormEl = containerEl.querySelector('button.confirm');
+        }
+        if (firstFormEl) firstFormEl.focus();
     }
 
     onChanage() {

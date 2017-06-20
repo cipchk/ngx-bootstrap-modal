@@ -20,7 +20,7 @@ export interface AlertModel {
                      <p>{{message || 'TADAA-AM!'}}</p>
                    </div>
                    <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="close()">OK</button>
+                     <button type="button" autofocus class="btn btn-primary" (click)="close()">OK</button>
                    </div>
                 </div>
              </div>`

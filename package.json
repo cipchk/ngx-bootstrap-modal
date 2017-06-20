@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-modal",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "typings": "index.d.ts",
   "description": "simplify the work with bootstrap modal dialogs",
@@ -10,9 +10,9 @@
   },
   "keywords": [
     "ngx-bootstrap-modal",
-    "ng2-bootstrap-modal",
+    "angular2 bootstrap modal",
     "ngx-modal",
-    "ng2-modal"
+    "angular2 modal"
   ],
   "author": "cipchk <cipchk>",
   "license": "MIT",
