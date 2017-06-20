@@ -3,7 +3,7 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "@angular/common": "*",
-    "@angular/core": "*"
+    "@angular/common": ">=4.0.0",
+    "@angular/core": ">=4.0.0"
   }
 }
