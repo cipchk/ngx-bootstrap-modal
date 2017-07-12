@@ -10,35 +10,35 @@ import { BuiltInComponent } from './built-in.dialog';
 export interface DialogOptions {
     /**
      * 指定模态顺序
-     * 
+     *
      * @type {number}
      * @default 自动叠加
      */
     index?: number;
     /**
      * 自动关闭时间（单位：ms）
-     * 
+     *
      * @type {number}
      * @default 不会自动关闭
      */
     timeout?: number;
     /**
      * 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。
-     * 
+     *
      * @type {boolean}
      * @default true
      */
     backdrop?: boolean | string;
     /**
      * 背景色
-     * 
+     *
      * @type {string}
      * @default 'rgba(0,0,0,.5)' 半透明
      */
     backdropColor?: string;
     /**
      * 键盘上的 esc 键被按下时关闭模态框。
-     * 
+     *
      * @type {boolean}
      * @default true
      */
@@ -46,7 +46,7 @@ export interface DialogOptions {
 }
 
 export class DialogServiceConfig {
-    container: HTMLElement = null;
+    container?: HTMLElement = null;
 
     builtInOptions?: BuiltInOptions;
 }
@@ -169,9 +169,9 @@ export class DialogService {
 
     /**
      * Show Alter
-     * 
-     * @param {string} title 
-     * @param {string} content 
+     *
+     * @param {string} title
+     * @param {string} content
      * @param {BuiltInOptions} 覆盖内置配置参数
      */
     alert(title: string, content: string, options?: BuiltInOptions) {
@@ -185,9 +185,9 @@ export class DialogService {
 
     /**
      * Show confirm
-     * 
-     * @param {string} title 
-     * @param {string} content 
+     *
+     * @param {string} title
+     * @param {string} content
      * @param {BuiltInOptions} 覆盖内置配置参数
      * @returns {Promise<boolean>} 返回一个Promise布尔类型
      */
@@ -206,8 +206,8 @@ export class DialogService {
 
     /**
      * Show prompt
-     * 
-     * @param {string} title 
+     *
+     * @param {string} title
      * @param {BuiltInOptions} 覆盖内置配置参数
      * @returns {Promise<any>} 返回一个Promise任意类型
      */
