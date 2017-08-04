@@ -37,7 +37,7 @@ import { BuiltInOptions } from './built-in.options';
                         <select *ngSwitchCase="'select'" [(ngModel)]="promptData" name="promptData"
                             (ngModelChange)="onChanage()"
                             class="form-control" [ngClass]="{'form-control-danger': prompError}">
-                            <option *ngFor="let si of opt.inputOptions | keys" [ngValue]="si.key">{{si.value}}</option>
+                            <option *ngFor="let i of opt.inputOptions" [ngValue]="i">{{i.text}}</option>
                         </select>
                         <div *ngSwitchCase="'range'" class="row modal-range">
                             <div class="col-{{opt.size}}-9">
@@ -47,22 +47,23 @@ import { BuiltInOptions } from './built-in.options';
                             <div class="col-{{opt.size}}-3"><p class="form-control-static">{{promptData}}</p></div>
                         </div>
                         <div *ngSwitchCase="'checkbox'">
-                            <label class="checkbox-inline custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="promptData" class="custom-control-input">
+                            <label *ngFor="let i of opt.inputOptions" class="checkbox-inline custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="i._checked" [value]="i" name="checkbox1"
+                                    class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description"> {{opt.inputOptions}}</span>
+                                <span class="custom-control-description"> {{i.text}}</span>
                             </label>
                         </div>
                         <div *ngSwitchCase="'radio'">
-                            <label class="radio-inline custom-control custom-radio" *ngFor="let si of opt.inputOptions | keys">
-                                <input type="radio" (click)="promptData=si.key" [checked]="si.key===promptData" class="custom-control-input">
+                            <label *ngFor="let i of opt.inputOptions" class="radio-inline custom-control custom-radio">
+                                <input type="radio" (click)="promptData=i" [checked]="i===promptData" class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description"> {{si.value}}</span>
+                                <span class="custom-control-description"> {{i.text}}</span>
                             </label>
                         </div>
                         <input *ngSwitchDefault type="{{opt.input}}"
                             placeholder="{{opt.inputPlaceholder}}" [(ngModel)]="promptData" name="promptData"
-                            (ngModelChange)="onChanage()" (keyup)="onKeyup($event)"
+                            (ngModelChange)="onChanage()" (keyup)="onKeyup($event)" [maxlength]="opt.inputAttributes.maxlength"
                             class="form-control" [ngClass]="{'form-control-danger': prompError}">
                         <div class="form-control-feedback" *ngIf="prompError">{{opt.inputError}}</div>
                     </div>
@@ -80,37 +81,64 @@ import { BuiltInOptions } from './built-in.options';
 })
 export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
     @ViewChild('container') container: any;
-    public opt: BuiltInOptions;
-    public checkboxMap: any = {};
-    public classs: Object = {};
+    opt: BuiltInOptions;
+    checkboxMap: any = {};
+    classs: Object = {};
 
-    public prompError: boolean = false;
-    public promptData: any;
+    prompError: boolean = false;
+    promptData: any;
     constructor(dialogService: DialogService) {
         super(dialogService);
     }
 
     ngOnInit() {
-        if (this.opt.className)
-            this.classs[this.opt.className] = true;
+        let options = this.opt;
+        if (options.className)
+            this.classs[options.className] = true;
 
-        if (this.opt.icon)
+        if (options.icon)
             this.classs['has-icon'] = true;
 
-        if (this.opt.type === 'prompt' && !this.opt.inputRegex) {
-            switch (this.opt.input) {
-                case 'email':
-                    this.opt.inputRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    if (!this.opt.inputError) this.opt.inputError = '邮箱格式不正确';
-                    break;
-                case 'url':
-                    this.opt.inputRegex = /^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/;
-                    if (!this.opt.inputError) this.opt.inputError = '网址格式不正确';
-                    break;
+        if (options.type === 'prompt') {
+            if (!options.inputRegex) {
+                switch (options.input) {
+                    case 'email':
+                        options.inputRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        if (!options.inputError) options.inputError = '邮箱格式不正确';
+                        break;
+                    case 'url':
+                        options.inputRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                        if (!options.inputError) options.inputError = '网址格式不正确';
+                        break;
+                }
             }
+
+            if (options.inputOptions && !Array.isArray(options.inputOptions)) {
+                let keys = [];
+                for (let key in options.inputOptions) {
+                    keys.push({ key: key, text: options.inputOptions[key] });
+                }
+                options.inputOptions = keys;
+            }
+            options.inputOptions = Object.assign([], options.inputOptions);
+
+            options.inputAttributes = Object.assign({
+                maxlength: null,
+                min: 0,
+                max: 100,
+                step: 1
+            }, options.inputAttributes);
         }
-        
-        this.promptData = this.opt.inputValue;
+
+        // 默认值
+        let defaultValue = options.inputValue;
+        if (options.input === 'checkbox' && !Array.isArray(options.inputValue)) {
+            defaultValue = typeof defaultValue !== 'undefined' ? [ defaultValue ] : [];
+        }
+        options.inputValue = defaultValue || '';
+
+            console.log(options);
+        this.promptData = options.inputValue;
         if (this.promptData) {
             this.promptCheck();
         }
@@ -121,16 +149,22 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
     }
 
     private promptCheck(): boolean {
-        if (this.opt.input !== 'checkbox' && this.opt.inputRequired === true && !this.promptData) {
-            this.prompError = true;
-            return false;
+        if (this.opt.inputRequired === true) {
+            if (this.opt.input === 'checkbox' && this.promptData.length === 0) {
+                this.prompError = true;
+                return false;
+            }
+            if (!this.promptData) {
+                this.prompError = true;
+                return false;
+            }
         }
 
         if (this.opt.inputRegex && !this.opt.inputRegex.test(this.promptData.toString())) {
             this.prompError = true;
             return false;
         }
-        
+
         this.prompError = false;
         return true;
     }
@@ -163,7 +197,16 @@ export class BuiltInComponent extends DialogComponent<BuiltInOptions, any> {
                 break;
             case 'prompt':
                 if (!this.promptCheck()) return;
-                this.result = this.promptData;
+                let ret = this.promptData;
+                if (this.opt.input === 'checkbox') {
+                    ret = this.opt.inputOptions
+                                .filter((item: any) => item._checked)
+                                .map((item: any) => {
+                                    delete item._checked;
+                                    return item;
+                                });
+                }
+                this.result = ret;
                 break;
         }
 

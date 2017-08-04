@@ -1,4 +1,3 @@
-import { KeysPipe } from './keys.pipe';
 import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
@@ -26,8 +25,7 @@ export function dialogServiceFactory(resolver: ComponentFactoryResolver, applica
     declarations: [
         DialogHolderComponent,
         DialogWrapperComponent,
-        BuiltInComponent,
-        KeysPipe
+        BuiltInComponent
     ],
     providers: [
         DialogService

@@ -14,7 +14,7 @@ export class DemoComponent {
     confirmResult: boolean = null;
     promptMessage: string = '';
 
-    constructor(public dialogService: DialogService) { 
+    constructor(public dialogService: DialogService) {
     }
 
 
@@ -41,13 +41,13 @@ export class DemoComponent {
             this.confirm_result = res ? '确认' : '取消';
         });
     }
-    inputOptions: string = `{
-        "": "请选择",
-        "durex": "杜蕾斯",
-        "jissbon": "杰士邦",
-        "donless": "多乐士",
-        "first": "处男"
-    }`;
+    inputOptions: string = `[
+            { "text": "请选择" },
+            { "text": "杜蕾斯", "value": "durex", "other": 1 },
+            { "text": "杰士邦", "value": "jissbon" },
+            { "text": "多乐士", "value": "donless" },
+            { "text": "处男", "value": "first" }
+        ]`;
     regex: string = ''; // [a-z]+
     prompt_result: any;
     bPrompt() {
@@ -55,16 +55,19 @@ export class DemoComponent {
             this.opt.inputRegex = new RegExp(this.regex);
         else
             this.opt.inputRegex = null;
-        
+
         if (this.inputOptions) {
             try {
-                this.opt.inputOptions = this.opt.input == 'checkbox' ? this.inputOptions : JSON.parse(this.inputOptions);
-            }catch(ex) {
+                this.opt.inputOptions = JSON.parse(this.inputOptions);
+            } catch (ex) {
                 alert(`数据无法JSON.parse：${ex}`);
                 return;
             }
+            if (this.opt.input === 'select' && this.opt.inputOptions && Array.isArray(this.opt.inputOptions)) {
+                this.opt.inputValue = this.opt.inputOptions[0];
+            }
         } else {
-            this.opt.inputOptions = {};
+            this.opt.inputOptions = [];
         }
         this.opt.icon = '';
 

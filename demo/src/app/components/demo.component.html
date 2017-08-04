@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="col-sm-4" style="padding-top: 40px;">
-        <button class="btn btn-default btn-block" 
+        <button class="btn btn-default btn-block"
             (click)="dialogService.alert(opt.title || '提醒', opt.content || '确认要删除吗？', opt)">Show alert</button>
 
         <button class="btn btn-default btn-block" (click)="bConfirm()">Show confirm</button>
@@ -124,9 +124,9 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <button class="btn btn-primary btn-block" 
+        <button class="btn btn-primary btn-block"
             (click)="bPrompt()">Show prompt</button>
-        <p *ngIf="prompt_result">Result:{{prompt_result}}</p>
+        <p *ngIf="prompt_result">Result:{{prompt_result | json}}</p>
         <pre><code>{{opt | json}}</code></pre>
     </div>
 </div>
