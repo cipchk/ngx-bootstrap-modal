@@ -172,9 +172,9 @@ class DialogService {
 | inputPlaceholder | string |  | Input `placeholder` 字段 |
 | inputValue | any |  | Input 初始化值 |
 | inputRequired | any |  | Input `required` 字段，必填项校验失败时【确定】按钮为 `disabled` 状态。 |
-| inputRegex | `RegExp` |  | Input 正则判断校验，校验失败时【确定】按钮为 `disabled` 状态。 |
+| inputRegex | RegExp |  | Input 正则判断校验，校验失败时【确定】按钮为 `disabled` 状态。 |
 | inputError | string |  | 输入参数无效时提醒文本。 |
-| inputOptions | `{ text: string, [key: string]: any }[] | any` |  | 数据两种数据格式：键值对象或{text:string}[]数组，如果input值为 `select` `radio` `checkbox` 时为必填项。对象键表示属性名，对象值表示属性值。当 `checkbox` 时为字符串文本，用于显示 checkbox 后面的文本。 |
+| inputOptions | { text: string }[]或Object |  | 数据两种数据格式：键值对象或{text:string}[]数组，如果input值为 `select` `radio` `checkbox` 时为必填项。对象键表示属性名，对象值表示属性值。当 `checkbox` 时为字符串文本，用于显示 checkbox 后面的文本。 |
 | inputAttributes | any |  | HTML元素属性对象，例如 `min` `max` 等，对象键表示属性名，对象值表示属性值 |
 | size | string | sm | 尺寸，包含值：`lg`、`sm` |
 | className | string |  | 自定义class |
