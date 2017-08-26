@@ -137,6 +137,14 @@ export interface BuiltInOptions {
     confirmButtonClass?: string;
 
     /**
+     * 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。
+     *
+     * @type {boolean}
+     * @default true
+     */
+    backdrop?: boolean | string;
+
+    /**
      * 显示时回调函数
      *
      * @type {Function}
@@ -149,4 +157,25 @@ export interface BuiltInOptions {
      * @type {Function}
      */
     onHide?: Function;
+    /**
+     * 自动关闭时间（单位：ms）
+     *
+     * @type {number}
+     * @default 不会自动关闭
+     */
+    timeout?: number;
+    /**
+     * 背景色
+     *
+     * @type {string}
+     * @default 'rgba(0,0,0,.5)' 半透明
+     */
+    backdropColor?: string;
+    /**
+     * 键盘上的 esc 键被按下时关闭模态框。
+     *
+     * @type {boolean}
+     * @default true
+     */
+    keyboard?: boolean;
 }

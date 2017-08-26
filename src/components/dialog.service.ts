@@ -167,6 +167,14 @@ export class DialogService {
             opt.onShow();
     }
 
+    private mergerDialog(options: DialogOptions, built: BuiltInOptions): DialogOptions {
+        let newOptions = {};
+        Object.keys(options).forEach(key => {
+            if (typeof built[key] !== 'undefined') newOptions[key] = built[key];
+        });
+        return newOptions;
+    }
+
     /**
      * Show Alter
      *
@@ -180,7 +188,12 @@ export class DialogService {
             title: title,
             content: content,
             showCancelButton: false
-        }));
+        }), this.mergerDialog({
+            timeout: null,
+            backdrop: true,
+            backdropColor: 'rgba(0,0,0,.5)',
+            keyboard: true
+        }, options));
     }
 
     /**
@@ -200,7 +213,12 @@ export class DialogService {
                 onHide: (res: boolean) => {
                     resolve(res === undefined ? false : res);
                 }
-            }));
+            }), this.mergerDialog({
+                timeout: null,
+                backdrop: 'static',
+                backdropColor: 'rgba(0,0,0,.5)',
+                keyboard: false
+            }, options));
         });
     }
 
@@ -211,19 +229,24 @@ export class DialogService {
      * @param {BuiltInOptions} 覆盖内置配置参数
      * @returns {Promise<any>} 返回一个Promise任意类型
      */
-    prompt(title: string, promptOptions?: BuiltInOptions): Promise<any> {
+    prompt(title: string, options?: BuiltInOptions): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.show(Object.assign(<BuiltInOptions>{
                 input: 'text',
                 inputRequired: true,
                 inputError: '不可为空'
-            }, promptOptions, <BuiltInOptions>{
+            }, options, <BuiltInOptions>{
                 type: 'prompt',
                 title: title,
                 onHide: (res: any) => {
                     resolve(res);
                 }
-            }));
+            }), this.mergerDialog({
+                timeout: null,
+                backdrop: 'static',
+                backdropColor: 'rgba(0,0,0,.5)',
+                keyboard: false
+            }, options));
         });
     }
 }

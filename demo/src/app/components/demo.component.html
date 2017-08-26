@@ -40,7 +40,33 @@
                 <label class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.showCloseButton">
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">右上角显示关闭按钮</span>
+                    <span class="custom-control-description">Show close button of topright</span>
+                </label>
+            </div>
+            <label class="col-sm-2 col-form-label">Backdrop</label>
+            <div class="col-sm-4">
+                <select [(ngModel)]="backdrop" (ngModelChange)="backdropChange()" name="input" class="form-control">
+                    <option [value]="'true'">Allow Close</option>
+                    <option [value]="'false'">No Background</option>
+                    <option [value]="'static'">Static</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Timeout</label>
+            <div class="col-sm-4">
+                <select [(ngModel)]="opt.timeout" name="input" class="form-control">
+                    <option [value]="0">never</option>
+                    <option [value]="3000">3s</option>
+                    <option [value]="10000">10s</option>
+                </select>
+            </div>
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.keyboard">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">allow `esc` close</span>
                 </label>
             </div>
         </div>

@@ -6,35 +6,35 @@
 interface DialogOptions {
     /**
      * 指定模态顺序
-     * 
+     *
      * @type {number}
      * @default 自动叠加
      */
     index?: number;
     /**
      * 自动关闭时间（单位：ms）
-     * 
+     *
      * @type {number}
      * @default 不会自动关闭
      */
     timeout?: number;
     /**
      * 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。
-     * 
+     *
      * @type {boolean}
      * @default true
      */
     backdrop?: boolean | string;
     /**
      * 背景色
-     * 
+     *
      * @type {string}
      * @default 'rgba(0,0,0,.5)' 半透明
      */
     backdropColor?: string;
     /**
      * 键盘上的 esc 键被按下时关闭模态框。
-     * 
+     *
      * @type {boolean}
      * @default true
      */
@@ -49,7 +49,7 @@ class DialogService {
     /**
     * 添加组件
     * @param {Type<DialogComponent<T1, T2>} component - Modal dialog component
-    * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template 
+    * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template
     * @param {DialogOptions?} Dialog options
     * @return {Observable<T2>} - returns Observable to get dialog result
     */
@@ -65,7 +65,7 @@ class DialogService {
      * 移除所有批件
      */
     removeAll(): void {}
-    
+
     /**
      * 构建一个内置模态
      * @param builtInOptions 内置配置参数
@@ -75,27 +75,27 @@ class DialogService {
 
     /**
      * Show Alter
-     * 
-     * @param {string} title 
-     * @param {string} content 
+     *
+     * @param {string} title
+     * @param {string} content
      * @param {BuiltInOptions} 覆盖内置配置参数
      */
     alert(title: string, content: string, options?: BuiltInOptions) {}
-    
+
     /**
      * Show confirm
-     * 
-     * @param {string} title 
-     * @param {string} content 
+     *
+     * @param {string} title
+     * @param {string} content
      * @param {BuiltInOptions} 覆盖内置配置参数
      * @returns {Promise<boolean>} 返回一个Promise布尔类型
      */
     confirm(title: string, content: string, options?: BuiltInOptions): Promise<boolean> {}
-    
+
     /**
      * Show prompt
-     * 
-     * @param {string} title 
+     *
+     * @param {string} title
      * @param {BuiltInOptions} 覆盖内置配置参数
      * @returns {Promise<any>} 返回一个Promise任意类型
      */
@@ -117,13 +117,13 @@ abstract class DialogComponent<T1, T2> implements T1 {
     * @param {DialogService} dialogService - instance of DialogService
     */
     constructor(dialogService: DialogService);
-    
+
     /**
-    * Dialog result 
+    * Dialog result
     * @type {T2}
     */
     protected result:T2;
-    
+
     /**
     * Closes dialog
     */
@@ -156,5 +156,9 @@ abstract class DialogComponent<T1, T2> implements T1 {
 | showConfirmButton | boolean | true | 显示确认按钮 |
 | confirmButtonText | string | 确认 | 确认按钮文本 |
 | confirmButtonClass | string | btn-primary | 确认按钮CSS类 |
+| backdrop |  | false | 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。 |
+| backdropColor |  | rgba(0,0,0,.5) | 背景色 |
+| keyboard |  | true | 键盘上的 esc 键被按下时关闭模态框。 |
+| timeout | number | 0 | 自动关闭时间（单位：ms），0表示不会自动关闭 |
 | onShow | Function |  | 显示时回调函数 |
 | onHide | Function |  | 隐藏时回调函数 |

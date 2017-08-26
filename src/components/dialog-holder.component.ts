@@ -46,7 +46,7 @@ export class DialogHolderComponent {
             backdropColor: 'rgba(0,0,0,.5)',
             keyboard: true
         }, options);
-        
+
         if (options.backdrop === false)
             options.backdropColor = '';
 
@@ -70,7 +70,7 @@ export class DialogHolderComponent {
             dialogWrapper.container.nativeElement.classList.add('show');
             dialogWrapper.container.nativeElement.classList.add('in');
         });
-        if (options.timeout) {
+        if (options.timeout && options.timeout > 0) {
             setTimeout(() => {
                 this.removeDialog(_component);
             }, options.timeout);

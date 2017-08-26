@@ -17,7 +17,7 @@ export class DemoComponent {
     constructor(public dialogService: DialogService) {
     }
 
-
+    backdrop: string = 'true';
     opt: any = {
         title: '',
         content: '',
@@ -33,8 +33,25 @@ export class DemoComponent {
         showCancelButton: true,
         cancelButtonText: '取消',
         showConfirmButton: true,
-        confirmButtonText: '确认'
+        confirmButtonText: '确认',
+        backdrop: true,
+        timeout: 0,
+        keyboard: true
     };
+
+    backdropChange() {
+        switch (this.backdrop) {
+            case 'true':
+                this.opt.backdrop = true;
+                break;
+            case 'false':
+                this.opt.backdrop = false;
+                break;
+            case 'static':
+                this.opt.backdrop = 'static';
+                break;
+        }
+    }
     confirm_result: string = '';
     bConfirm() {
         this.dialogService.confirm(this.opt.title || '提醒', this.opt.content || '确认要删除吗？', this.opt).then((res: any) => {

@@ -1,3 +1,7 @@
+# 1.0.9
+
+- `BuiltInOptions` 增加 `timeout`、`backdrop`、`backdropColor`、`keyboard` 支持。([#1](https://github.com/cipchk/ngx-bootstrap-modal/issues/1))
+
 # 1.0.8
 
 - [修] checkbox 允许多个项。
