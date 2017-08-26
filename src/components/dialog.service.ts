@@ -169,6 +169,7 @@ export class DialogService {
 
     private mergerDialog(options: DialogOptions, built: BuiltInOptions): DialogOptions {
         let newOptions = {};
+        if (!built) return newOptions;
         Object.keys(options).forEach(key => {
             if (typeof built[key] !== 'undefined') newOptions[key] = built[key];
         });
@@ -189,7 +190,7 @@ export class DialogService {
             content: content,
             showCancelButton: false
         }), this.mergerDialog({
-            timeout: null,
+            timeout: 0,
             backdrop: true,
             backdropColor: 'rgba(0,0,0,.5)',
             keyboard: true
@@ -214,7 +215,7 @@ export class DialogService {
                     resolve(res === undefined ? false : res);
                 }
             }), this.mergerDialog({
-                timeout: null,
+                timeout: 0,
                 backdrop: 'static',
                 backdropColor: 'rgba(0,0,0,.5)',
                 keyboard: false
@@ -242,7 +243,7 @@ export class DialogService {
                     resolve(res);
                 }
             }), this.mergerDialog({
-                timeout: null,
+                timeout: 0,
                 backdrop: 'static',
                 backdropColor: 'rgba(0,0,0,.5)',
                 keyboard: false
