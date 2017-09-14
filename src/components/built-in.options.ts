@@ -142,7 +142,7 @@ export interface BuiltInOptions {
      * @type {boolean}
      * @default true
      */
-    backdrop?: boolean | string;
+    backdrop?: boolean | 'static';
 
     /**
      * 显示时回调函数

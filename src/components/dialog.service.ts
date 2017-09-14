@@ -28,7 +28,7 @@ export interface DialogOptions {
      * @type {boolean}
      * @default true
      */
-    backdrop?: boolean | string;
+    backdrop?: boolean | 'static';
     /**
      * 背景色
      *
@@ -158,7 +158,12 @@ export class DialogService {
 
         this.addDialog<BuiltInOptions, any>(BuiltInComponent, <any>{
             opt: opt
-        }, options).subscribe(res => {
+        }, this.mergerDialog({
+            timeout: 0,
+            backdrop: true,
+            backdropColor: 'rgba(0,0,0,.5)',
+            keyboard: true
+        }, Object.assign(builtInOptions, options))).subscribe(res => {
             if (opt.onHide)
                 opt.onHide(res);
         });

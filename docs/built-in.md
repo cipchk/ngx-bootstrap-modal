@@ -185,7 +185,7 @@ class DialogService {
 | showConfirmButton | boolean | true | 显示确认按钮 |
 | confirmButtonText | string | 确认 | 确认按钮文本 |
 | confirmButtonClass | string | btn-primary | 确认按钮CSS类 |
-| backdrop |  | false | 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。 |
+| backdrop | boolean, 'static' | false | 是否包括背景且点击背景会关闭，如果传递的是字符串 'static' 点击背景不会关闭。 |
 | backdropColor |  | rgba(0,0,0,.5) | 背景色 |
 | keyboard |  | true | 键盘上的 esc 键被按下时关闭模态框。 |
 | timeout | number | 0 | 自动关闭时间（单位：ms），0表示不会自动关闭 |

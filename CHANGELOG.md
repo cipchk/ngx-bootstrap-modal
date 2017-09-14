@@ -1,3 +1,7 @@
+# 1.0.11
+
+- fixed [#2](https://github.com/cipchk/ngx-bootstrap-modal/issues/2)
+
 # 1.0.10
 
 - `BuiltInOptions` 增加 `timeout`、`backdrop`、`backdropColor`、`keyboard` 支持。([#1](https://github.com/cipchk/ngx-bootstrap-modal/issues/1))
