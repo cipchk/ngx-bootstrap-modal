@@ -1,3 +1,7 @@
+# 1.0.12
+
+- Remove `peerDependencies`
+
 # 1.0.11
 
 - fixed [#2](https://github.com/cipchk/ngx-bootstrap-modal/issues/2)
