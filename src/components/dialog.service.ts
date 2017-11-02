@@ -1,9 +1,7 @@
-import {
-    Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef, Type, Optional
-} from "@angular/core";
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogComponent } from "./dialog.component";
-import { Observable } from "rxjs";
+import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef, Type, Optional } from '@angular/core';
+import { DialogHolderComponent } from './dialog-holder.component';
+import { DialogComponent } from './dialog.component';
+import { Observable } from 'rxjs/Observable';
 import { BuiltInOptions } from './built-in.options';
 import { BuiltInComponent } from './built-in.dialog';
 
@@ -114,13 +112,12 @@ export class DialogService {
      * @return {DialogHolderComponent}
      */
     private createDialogHolder(): DialogHolderComponent {
+        const componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
 
-        let componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
-
-        let componentRef = componentFactory.create(this.injector);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        const componentRef = componentFactory.create(this.injector);
+        const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         if (!this.container) {
-            let componentRootViewContainer = this.applicationRef['_rootComponents'][0];
+            const componentRootViewContainer = (<any>this.applicationRef)['_rootComponents'][0];
             this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         }
         this.applicationRef.attachView(componentRef.hostView);
@@ -141,7 +138,7 @@ export class DialogService {
      * @param options 模态配置参数
      */
     show(builtInOptions: BuiltInOptions, options?: DialogOptions) {
-        let opt = Object.assign(<BuiltInOptions>{
+        const opt = Object.assign(<BuiltInOptions>{
             type: 'default',
             size: 'sm',
             input: 'text',
@@ -173,7 +170,7 @@ export class DialogService {
     }
 
     private mergerDialog(options: DialogOptions, built: BuiltInOptions): DialogOptions {
-        let newOptions = {};
+        const newOptions: any = {};
         if (!built) return newOptions;
         Object.keys(options).forEach(key => {
             if (typeof built[key] !== 'undefined') newOptions[key] = built[key];

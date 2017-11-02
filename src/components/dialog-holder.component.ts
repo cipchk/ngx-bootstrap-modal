@@ -1,21 +1,14 @@
-import {
-    Component, ViewChild, ViewContainerRef, ComponentFactoryResolver,
-    Type
-} from "@angular/core";
-import { DialogComponent } from "./dialog.component";
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { Observable } from "rxjs";
-import { DialogOptions } from "./dialog.service";
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Type, HostListener } from '@angular/core';
+import { DialogComponent } from './dialog.component';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { Observable } from 'rxjs/Observable';
+import { DialogOptions } from './dialog.service';
 
 @Component({
     selector: 'dialog-holder',
-    template: '<ng-template #element></ng-template>',
-    host: {
-        '(body:keydown)': 'documentKeypress($event)'
-    }
+    template: '<ng-template #element></ng-template>'
 })
 export class DialogHolderComponent {
-
     /**
      * Target element to insert dialogs
      */
@@ -55,10 +48,10 @@ export class DialogHolderComponent {
             document.body.classList.add('modal-open');
         }
 
-        let factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
-        let componentRef = this.element.createComponent(factory, options.index);
-        let dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent>componentRef.instance;
-        let _component: DialogComponent<T, T1> = dialogWrapper.addComponent(component);
+        const factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
+        const componentRef = this.element.createComponent(factory, options.index);
+        const dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent>componentRef.instance;
+        const _component: DialogComponent<T, T1> = dialogWrapper.addComponent(component);
         _component.options = options;
         if (typeof (options.index) !== 'undefined') {
             this.dialogs.splice(options.index, 0, _component);
@@ -89,7 +82,7 @@ export class DialogHolderComponent {
      * @param {DialogComponent} component
      */
     removeDialog(component: DialogComponent<any, any>) {
-        let element = component.wrapper.container.nativeElement;
+        const element = component.wrapper.container.nativeElement;
 
         element.classList.remove('show');
         element.classList.remove('in');
@@ -100,7 +93,7 @@ export class DialogHolderComponent {
     }
 
     private _removeElement(component: any) {
-        let index = this.dialogs.indexOf(component);
+        const index = this.dialogs.indexOf(component);
         if (index > -1) {
             this.element.remove(index);
             this.dialogs.splice(index, 1);
@@ -112,12 +105,13 @@ export class DialogHolderComponent {
         this.dialogs = [];
     }
 
+    @HostListener('window:keydown', ['$event'])
     documentKeypress(event: KeyboardEvent) {
         // 检查是否最后一个
         if (this.dialogs.length <= 0) return;
 
         // 移除最新一个组件
-        let component = this.dialogs[this.dialogs.length - 1];
+        const component = this.dialogs[this.dialogs.length - 1];
         if (component.options.keyboard === true && event.keyCode === 27)
             this.removeDialog(component);
     }

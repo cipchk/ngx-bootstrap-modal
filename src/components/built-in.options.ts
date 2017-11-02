@@ -178,4 +178,6 @@ export interface BuiltInOptions {
      * @default true
      */
     keyboard?: boolean;
+
+    [key: string]: any;
 }

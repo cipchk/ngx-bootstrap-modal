@@ -1,3 +1,8 @@
+# 1.0.13
+
++ Support Angular5.
+
+
 # 1.0.12
 
 - Remove `peerDependencies`

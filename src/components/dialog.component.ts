@@ -1,9 +1,8 @@
-import {
-    OnDestroy
-} from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogService, DialogOptions } from "./dialog.service";
+import { OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogService, DialogOptions } from './dialog.service';
 
 /**
  * Abstract dialog
@@ -13,7 +12,7 @@ import { DialogService, DialogOptions } from "./dialog.service";
 export class DialogComponent<T, T1> {
 
     public options: DialogOptions;
-    
+
     /**
      * Observer to return result from dialog
      */
@@ -41,11 +40,11 @@ export class DialogComponent<T, T1> {
      * @param {T} data
      * @return {Observable<T1>}
      */
-    fillData(data: T): Observable<T1> {
-        data = data || <T>{};
-        let keys = Object.keys(data);
+    fillData(data: any): Observable<T1> {
+        data = data || <any>{};
+        const keys = Object.keys(data);
         for (let i = 0, length = keys.length; i < length; i++) {
-            let key = keys[i];
+            const key = keys[i];
             this[key] = data[key];
         }
         return Observable.create((observer: any) => {
@@ -67,4 +66,6 @@ export class DialogComponent<T, T1> {
             this.observer.complete();
         }
     }
+
+    [key: string]: any;
 }
