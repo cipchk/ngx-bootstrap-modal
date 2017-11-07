@@ -1,3 +1,7 @@
+# 1.1.0
+
++ 修复v5不支持 `_rootComponents` 问题，close #3
+
 # 1.0.13
 
 + Support Angular5.

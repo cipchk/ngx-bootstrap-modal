@@ -116,10 +116,7 @@ export class DialogService {
 
         const componentRef = componentFactory.create(this.injector);
         const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        if (!this.container) {
-            const componentRootViewContainer = (<any>this.applicationRef)['_rootComponents'][0];
-            this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        }
+        if (!this.container) this.container = document.body;
         this.applicationRef.attachView(componentRef.hostView);
 
         componentRef.onDestroy(() => {
