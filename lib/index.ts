@@ -56,5 +56,18 @@ export class BootstrapModalModule {
             ]
         };
     }
+
+    static forChild(): ModuleWithProviders {
+        return {
+            ngModule: BootstrapModalModule,
+            providers: [
+                {
+                    provide: DialogService,
+                    useFactory: dialogServiceFactory,
+                    deps: [ComponentFactoryResolver, ApplicationRef, Injector, DialogServiceConfig]
+                }
+            ]
+        };
+    }
 }
 
