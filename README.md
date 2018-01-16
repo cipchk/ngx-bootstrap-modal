@@ -22,6 +22,10 @@ npm install ngx-bootstrap-modal --save
 
 ## Changes
 
+### 2.0.1
+
+- add `forChild()` method
+
 ### 2.0.0
 
 - **BREAKING CHANGES** Removed Injector from Resource class constructor
