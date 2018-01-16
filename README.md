@@ -6,19 +6,25 @@ simplify the work with bootstrap modal dialogs
 
 一个简单的**引导Bootstrap模态框组件启动**的服务，无须引入Bootstrap JS文件，并且兼容Bootstrap 3 4 版本。
 
-## 安装
+## Installation
 
 ```
 npm install ngx-bootstrap-modal --save
 ```
 
-[在线DEMO](https://cipchk.github.io/ngx-bootstrap-modal/)。
+[DEMO](https://cipchk.github.io/ngx-bootstrap-modal/) or [stackblitz](https://stackblitz.com/edit/ngx-bootstrap-modal)
 
-## 文档
+## Documents
 
-+ [内置模态使用方法](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/built-in.md)
-+ [自定义模态使用方法](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/custom.md)
-+ [接口说明](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/interfaces.md)
++ How using build-in methods, [Link](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/built-in.md)
++ How using custom component methods, [Link](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/custom.md)
++ [Interface](https://github.com/cipchk/ngx-bootstrap-modal/blob/master/docs/interfaces.md)
+
+## Changes
+
+### 2.0.0
+
+- **BREAKING CHANGES** Removed Injector from Resource class constructor
 
 ## Troubleshooting
 
