@@ -1,245 +1,243 @@
 <h3 class="text-center">内置组件</h3>
 <div class="row" style="margin: 50px 0;">
-    <div class="col-sm-8">
-        <p><strong>参数</strong></p>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">标题</label>
-            <div class="col-sm-10">
-                <input type="text" [(ngModel)]="opt.title" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">内容</label>
-            <div class="col-sm-10">
-                <input type="text" [(ngModel)]="opt.content" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">icon</label>
-            <div class="col-sm-4">
-                <select [(ngModel)]="opt.icon" class="form-control">
-                    <option value="">no</option>
-                    <option value="warning">warning</option>
-                    <option value="error">error</option>
-                    <option value="success">success</option>
-                    <option value="info">info</option>
-                    <option value="question">question</option>
-                </select>
-            </div>
-            <label class="col-sm-2 col-form-label">Size</label>
-            <div class="col-sm-4">
-                <select [(ngModel)]="opt.size" class="form-control">
-                    <option value="sm">sm</option>
-                    <option value="lg">lg</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-4">
-                <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.showCloseButton">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Show close button of topright</span>
-                </label>
-            </div>
-            <label class="col-sm-2 col-form-label">Backdrop</label>
-            <div class="col-sm-4">
-                <select [(ngModel)]="backdrop" (ngModelChange)="backdropChange()" name="input" class="form-control">
-                    <option [value]="'true'">Allow Close</option>
-                    <option [value]="'false'">No Background</option>
-                    <option [value]="'static'">Static</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Timeout</label>
-            <div class="col-sm-4">
-                <select [(ngModel)]="opt.timeout" name="input" class="form-control">
-                    <option [value]="0">never</option>
-                    <option [value]="3000">3s</option>
-                    <option [value]="10000">10s</option>
-                </select>
-            </div>
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-4">
-                <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.keyboard">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">allow `esc` close</span>
-                </label>
-            </div>
-        </div>
+  <div class="col-sm-8">
+    <p><strong>参数</strong></p>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">标题</label>
+      <div class="col-sm-10">
+        <input type="text" [(ngModel)]="opt.title" class="form-control">
+      </div>
     </div>
-    <div class="col-sm-4" style="padding-top: 40px;">
-        <button class="btn btn-default btn-block"
-            (click)="dialogService.alert(opt.title || '提醒', opt.content || '确认要删除吗？', opt)">Show alert</button>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">内容</label>
+      <div class="col-sm-10">
+        <input type="text" [(ngModel)]="opt.content" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">icon</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="opt.icon" class="form-control">
+          <option value="">no</option>
+          <option value="warning">warning</option>
+          <option value="error">error</option>
+          <option value="success">success</option>
+          <option value="info">info</option>
+          <option value="question">question</option>
+        </select>
+      </div>
+      <label class="col-sm-2 col-form-label">Size</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="opt.size" class="form-control">
+          <option value="sm">sm</option>
+          <option value="lg">lg</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-4">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.showCloseButton">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Show close button of topright</span>
+        </label>
+      </div>
+      <label class="col-sm-2 col-form-label">Backdrop</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="backdrop" (ngModelChange)="backdropChange()" name="input" class="form-control">
+          <option [value]="'true'">Allow Close</option>
+          <option [value]="'false'">No Background</option>
+          <option [value]="'static'">Static</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Timeout</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="opt.timeout" name="input" class="form-control">
+          <option [value]="0">never</option>
+          <option [value]="3000">3s</option>
+          <option [value]="10000">10s</option>
+        </select>
+      </div>
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-4">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.keyboard">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">allow `esc` close</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4" style="padding-top: 40px;">
+    <button class="btn btn-default btn-block" (click)="dialogService.alert(opt.title || '提醒', opt.content || '确认要删除吗？', opt)">Show alert</button>
 
-        <button class="btn btn-default btn-block" (click)="bConfirm()">Show confirm</button>
-        <p *ngIf="confirm_result">Result:{{confirm_result}}</p>
-    </div>
+    <button class="btn btn-default btn-block" (click)="bConfirm()">Show confirm</button>
+    <p *ngIf="confirm_result">Result:{{confirm_result}}</p>
+  </div>
 </div>
 <div class="row" style="margin: 30px 0;">
-    <div class="col-sm-8">
-        <p><strong>promp参数</strong></p>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">类型</label>
-            <div class="col-sm-4">
-                <select [(ngModel)]="opt.input" name="input" class="form-control">
-                    <option value="text">Text</option>
-                    <option value="email">Email</option>
-                    <option value="password">password</option>
-                    <option value="number">number</option>
-                    <option value="tel">tel</option>
-                    <option value="range">range</option>
-                    <option value="textarea">textarea</option>
-                    <option value="select">select</option>
-                    <option value="radio">radio</option>
-                    <option value="checkbox">checkbox</option>
-                    <option value="url">url</option>
-                </select>
-            </div>
-            <label class="col-sm-2 col-form-label">Placeholder</label>
-            <div class="col-sm-4">
-                <input type="text" [(ngModel)]="opt.inputPlaceholder" class="form-control">
-            </div>
-        </div>
-        <div *ngIf="opt.input === 'select' || opt.input === 'checkbox' || opt.input === 'radio'">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">data</label>
-                <div class="col-sm-10">
-                    <textarea [(ngModel)]="inputOptions" class="form-control" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="opt.input === 'range'">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">min</label>
-                <div class="col-sm-4">
-                    <input type="number" [(ngModel)]="opt.inputAttributes.min" class="form-control">
-                </div>
-                <label class="col-sm-2 col-form-label">max</label>
-                <div class="col-sm-4">
-                    <input type="number" [(ngModel)]="opt.inputAttributes.max" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">初始值</label>
-            <div class="col-sm-4">
-                <input type="text" [(ngModel)]="opt.inputValue" class="form-control">
-            </div>
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-4">
-                <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.inputRequired">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">必填</span>
-                </label>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">校验正则</label>
-            <div class="col-sm-4">
-                <input type="text" [(ngModel)]="regex" class="form-control">
-            </div>
-            <label class="col-sm-2 col-form-label">错误消息</label>
-            <div class="col-sm-4">
-                <input type="text" [(ngModel)]="opt.inputError" class="form-control">
-            </div>
-        </div>
+  <div class="col-sm-8">
+    <p><strong>promp参数</strong></p>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">类型</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="opt.input" name="input" class="form-control">
+          <option value="text">Text</option>
+          <option value="email">Email</option>
+          <option value="password">password</option>
+          <option value="number">number</option>
+          <option value="tel">tel</option>
+          <option value="range">range</option>
+          <option value="textarea">textarea</option>
+          <option value="select">select</option>
+          <option value="radio">radio</option>
+          <option value="checkbox">checkbox</option>
+          <option value="url">url</option>
+        </select>
+      </div>
+      <label class="col-sm-2 col-form-label">Placeholder</label>
+      <div class="col-sm-4">
+        <input type="text" [(ngModel)]="opt.inputPlaceholder" class="form-control">
+      </div>
     </div>
-    <div class="col-sm-4">
-        <button class="btn btn-primary btn-block"
-            (click)="bPrompt()">Show prompt</button>
-        <p *ngIf="prompt_result">Result:{{prompt_result | json}}</p>
-        <pre><code>{{opt | json}}</code></pre>
+    <div *ngIf="opt.input === 'select' || opt.input === 'checkbox' || opt.input === 'radio'">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">data</label>
+        <div class="col-sm-10">
+          <textarea [(ngModel)]="inputOptions" class="form-control" cols="30" rows="10"></textarea>
+        </div>
+      </div>
     </div>
+    <div *ngIf="opt.input === 'range'">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">min</label>
+        <div class="col-sm-4">
+          <input type="number" [(ngModel)]="opt.inputAttributes.min" class="form-control">
+        </div>
+        <label class="col-sm-2 col-form-label">max</label>
+        <div class="col-sm-4">
+          <input type="number" [(ngModel)]="opt.inputAttributes.max" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">初始值</label>
+      <div class="col-sm-4">
+        <input type="text" [(ngModel)]="opt.inputValue" class="form-control">
+      </div>
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-4">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="opt.inputRequired">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">必填</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">校验正则</label>
+      <div class="col-sm-4">
+        <input type="text" [(ngModel)]="regex" class="form-control">
+      </div>
+      <label class="col-sm-2 col-form-label">错误消息</label>
+      <div class="col-sm-4">
+        <input type="text" [(ngModel)]="opt.inputError" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-primary btn-block" (click)="bPrompt()">Show prompt</button>
+    <p *ngIf="prompt_result">Result:{{prompt_result | json}}</p>
+    <pre><code>{{opt | json}}</code></pre>
+  </div>
 </div>
 <h3 class="text-center">自定义组件</h3>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Alert example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showAlert()>Show alert</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Alert example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showAlert()>Show alert</button>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Confirm example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showConfirm()>Show confirm</button>
-    </div>
-    <div class="col-sm-4" *ngIf="confirmResult != null">
-        <span>Result: </span>
-        <b [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Confirm example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showConfirm()>Show confirm</button>
+  </div>
+  <div class="col-sm-4" *ngIf="confirmResult != null">
+    <span>Result: </span>
+    <b [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Prompt example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showPrompt()>Show prompt</button>
-    </div>
-    <div class="col-sm-4" *ngIf="promptMessage">
-        <span>Your name: </span>
-        <b>{{promptMessage}}</b>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Prompt example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showPrompt()>Show prompt</button>
+  </div>
+  <div class="col-sm-4" *ngIf="promptMessage">
+    <span>Your name: </span>
+    <b>{{promptMessage}}</b>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Close dialog by click outside example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showAlert2()>Show alert</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Close dialog by click outside example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showAlert2()>Show alert</button>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Click outside only close button: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showAlert5()>Show alert</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Click outside only close button: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showAlert5()>Show alert</button>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Close dialog by timeout example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showAlert3()>Show alert</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Close dialog by timeout example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showAlert3()>Show alert</button>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Custom backdrop color example: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showAlert4()>Show alert</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Custom backdrop color example: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showAlert4()>Show alert</button>
+  </div>
 </div>
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-4 text-right">
-        <b>Show dialog from dialog: </b>
-    </div>
-    <div class="col-sm-4">
-        <button class="btn btn-default btn-block" (click)=showParentDialog()>Show dialog</button>
-    </div>
+  <div class="col-sm-4 text-right">
+    <b>Show dialog from dialog: </b>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-default btn-block" (click)=showParentDialog()>Show dialog</button>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BootstrapModalModule } from '../index';
+import { BootstrapModalModule } from '../src/module';
 
 const html = ``;
 
@@ -12,9 +12,9 @@ describe('Component: ngx-bootstrap-modal', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [BootstrapModalModule]
+      imports: [BootstrapModalModule],
     });
-    TestBed.overrideComponent(TestComponent, {set: {template: html}});
+    TestBed.overrideComponent(TestComponent, { set: { template: html } });
     fixture = TestBed.createComponent(TestComponent);
     context = fixture.componentInstance;
     fixture.detectChanges();
@@ -26,7 +26,6 @@ describe('Component: ngx-bootstrap-modal', () => {
 });
 
 @Component({
-  template: ''
+  template: '',
 })
-class TestComponent {
-}
+class TestComponent {}

@@ -1,31 +1,33 @@
-.modal-dialog .modal-title { display: inline-block; }
+.modal-dialog .modal-title {
+  display: inline-block;
+}
 
-.modal-range [type="range"] {box-shadow: none;}
+.modal-range [type="range"] {
+  box-shadow: none;
+}
 
 .modal-prompt {
-    textarea {
-        height: 108px;
-        padding: 12px;
-    }
+  textarea {
+    height: 108px;
+    padding: 12px;
+  }
 
-    .form-control-feedback {
-        font-size: 12px;
-        position: inherit;
-        width: inherit;
-        text-align: left;
-    }
+  .form-control-feedback {
+    font-size: 12px;
+    position: inherit;
+    width: inherit;
+    text-align: left;
+  }
 }
 
-.modal-dialog.has-icon {
+.modal-dialog.has-icon {}
 
-}
-
-$icon-success:        #a5dc86 !default;
+$icon-success: #a5dc86 !default;
 $icon-success-border: rgba($icon-success, .2) !default;
-$icon-error:          #f27474 !default;
-$icon-warning:        #f8bb86 !default;
-$icon-info:           #3fc3ee !default;
-$icon-question:       #87adbd !default;
+$icon-error: #f27474 !default;
+$icon-warning: #f8bb86 !default;
+$icon-info: #3fc3ee !default;
+$icon-question: #87adbd !default;
 
 .modal-icon {
   width: 80px;
@@ -99,7 +101,8 @@ $icon-question:       #87adbd !default;
   &.modal-success {
     border-color: $icon-success;
 
-    [class^='success-circular-line'] { // Emulate moving circular line
+    [class^='success-circular-line'] {
+      // Emulate moving circular line
       border-radius: 50%;
       position: absolute;
       width: 60px;
@@ -125,7 +128,8 @@ $icon-question:       #87adbd !default;
       }
     }
 
-    .success-ring { // Ring
+    .success-ring {
+      // Ring
       width: 80px;
       height: 80px;
       border: 4px solid $icon-success-border;
@@ -138,7 +142,8 @@ $icon-question:       #87adbd !default;
       z-index: 2;
     }
 
-    .success-fix { // Hide corners left from animation
+    .success-fix {
+      // Hide corners left from animation
       width: 7px;
       height: 90px;
 

@@ -7,7 +7,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <p>simplify the work with bootstrap modal dialogs</p>
     <demo></demo>
   `,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-}
+export class AppComponent {}
