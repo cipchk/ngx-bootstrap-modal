@@ -1,22 +1,20 @@
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-/node_modules
+node_modules
 npm-debug.log
+# package-lock.json
+yarn.lock
+yarn-error.log
+
+.tmp
 .lib
-.ng_build
-package-lock.json
-
-# WebStorm
+*.iml
+dist
+coverage
 .idea
-.vscode
+debug.log
 
-# ignore build and dist for now
-/demo/dist
-/dist
-/coverage
-
-# ignore inline compiling
-/logs
-
-# AoT generated files
-factories
+src/app/routes/gen
+src/assets/color.less
+/scaffold
+/_scaffold
+/ng-alain
+/integration
